@@ -5,8 +5,10 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public",
-    "lint:js": "eslint --cache --ext .svelte .",
-    "lint:css": "stylelint 'src/**/*.svelte'"
+    "lint:css": "stylelint 'src/**/*.svelte'",
+    "lint:js": "eslint --cache src/**/*.{js,svelte}",
+    "lint:fix": "eslint --cache --fix src/**/*.{js,svelte}",
+    "prettier": "prettier --write ."
   },
   "devDependencies": {
     "@qimpl/eslint-config": "^1.3.6",
