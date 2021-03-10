@@ -18,6 +18,7 @@ io.use((socket, next) => {
   next();
 });
 
+let messages = [];
 io.on('connection', (socket) => {
   let users = [];
   for (let [id, socket] of io.of('/').sockets) {
@@ -27,6 +28,7 @@ io.on('connection', (socket) => {
     });
   }
   socket.emit('users', users);
+
   socket.broadcast.emit('user connected', {
     userID: socket.id,
     username: socket.username,
@@ -38,6 +40,11 @@ io.on('connection', (socket) => {
       userID: socket.id,
       username: socket.username,
     });
+  });
+
+  socket.on('message', (msg) => {
+    messages.push(msg);
+    io.emit('messages', messages);
   });
 });
 
